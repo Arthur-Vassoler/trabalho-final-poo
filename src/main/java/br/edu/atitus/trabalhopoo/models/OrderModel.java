@@ -6,20 +6,16 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "pedido")
 @Data
 public class OrderModel extends GenericModel {
-  public OrderModel() {
-    this.data = LocalDateTime.now();
-  }
-
   @Column
   private LocalDateTime data;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "produto_id")
   private ProductModel produto;
 
   @Column
-  private Double quantity;
+  private Double quantidade;
 }

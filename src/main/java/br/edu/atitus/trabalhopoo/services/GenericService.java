@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface GenericService<TEntidade extends GenericModel> {
 
@@ -20,17 +19,17 @@ public interface GenericService<TEntidade extends GenericModel> {
     return getRepository().save(objeto);
   }
 
-  default Optional<TEntidade> findById(UUID id) throws Exception{
+  default Optional<TEntidade> findById(long id) throws Exception{
     if (!getRepository().existsById(id))
       throw new Exception("Não existe registro com este Id");
     return getRepository().findById(id);
   }
 
-  default void deleteById(UUID id) {
+  default void deleteById(long id) {
     getRepository().deleteById(id);;
   }
 
-  default Page<TEntidade> findByName(Pageable pageable, String name){
-    return getRepository().findByNameContainingIgnoreCase(pageable, name);
+  default Page<TEntidade> findByNome(Pageable pageable, String name){
+    return getRepository().findByNomeContainingIgnoreCase(pageable, name);
   }
 }

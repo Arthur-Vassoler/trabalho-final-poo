@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public abstract class GenericController<TEntidade extends GenericModel> {
   abstract GenericService<TEntidade> getService();
@@ -34,7 +33,7 @@ public abstract class GenericController<TEntidade extends GenericModel> {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Object> putUsuario(@PathVariable UUID id, @RequestBody TEntidade entidade) {
+  public ResponseEntity<Object> putUsuario(@PathVariable long id, @RequestBody TEntidade entidade) {
     entidade.setId(id);
 
     return salvar(entidade);
@@ -44,10 +43,10 @@ public abstract class GenericController<TEntidade extends GenericModel> {
   public ResponseEntity<Object> getEntidades(
     @PageableDefault(page = 0, size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
     @RequestParam String name) throws Exception {
-    Page<TEntidade> entidades = getService().findByName(pageable, name);
+    Page<TEntidade> entidades = getService().findByNome(pageable, name);
 
     for (TEntidade tEntidade : entidades) {
-      UUID id = tEntidade.getId();
+      long id = tEntidade.getId();
 
       tEntidade.add(linkTo(methodOn(GenericController.class).getEntidadesById(id)).withSelfRel());
       tEntidade.add(linkTo(methodOn(GenericController.class).putUsuario(id, tEntidade))
@@ -58,7 +57,7 @@ public abstract class GenericController<TEntidade extends GenericModel> {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Object> getEntidadesById(@PathVariable UUID id) throws Exception {
+  public ResponseEntity<Object> getEntidadesById(@PathVariable long id) throws Exception {
     Optional<TEntidade> entidade = getService().findById(id);
     if (entidade.isEmpty())
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("TEntidade não encontrado com o Id " + id);
@@ -77,9 +76,8 @@ public abstract class GenericController<TEntidade extends GenericModel> {
 
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Object> deleteUsuario(@PathVariable UUID id) {
+  public ResponseEntity<Object> deleteUsuario(@PathVariable long id) {
     getService().deleteById(id);
     return ResponseEntity.status(HttpStatus.OK).body("Usuário com Id " + id + " deletado com sucesso!");
   }
-
 }

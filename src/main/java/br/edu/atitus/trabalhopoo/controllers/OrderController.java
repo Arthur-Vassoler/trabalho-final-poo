@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/pedidos")
 public class OrderController extends GenericController<OrderModel> {
   final OrderService orderService;
 

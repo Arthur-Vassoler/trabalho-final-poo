@@ -7,17 +7,17 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
-@Table(name = "products")
+@Table(name = "produto")
 @Data
 public class ProductModel extends GenericModel {
-  @NotBlank(message = "Campo description não pode ser vazio.")
+  @NotBlank(message = "Campo descricao não pode ser vazio.")
   @Column
-  private String description;
+  private String descricao;
 
-  @NotBlank(message = "Campo unitMeasure não pode ser vazio.")
+  @NotBlank(message = "Campo unidadeMedida não pode ser vazio.")
   @Column
-  private String unitMeasure;
+  private String unidadeMedida;
 
   @Column(name = "unit_value", nullable = false)
-  private Double unitValue;
+  private Double valorUnitario;
 }

@@ -6,10 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import java.util.UUID;
 
 @NoRepositoryBean
 public interface GenericRepository<TEntidade extends GenericModel>
-  extends JpaRepository<TEntidade, UUID> {
-  Page<TEntidade> findByNameContainingIgnoreCase(Pageable pageable, String name);
+  extends JpaRepository<TEntidade, Long> {
+  Page<TEntidade> findByNomeContainingIgnoreCase(Pageable pageable, String name);
 }

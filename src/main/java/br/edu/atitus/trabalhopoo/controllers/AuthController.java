@@ -34,14 +34,14 @@ public class AuthController {
     this.userService = userService;
   }
 
-  @PostMapping("/singup")
+  @PostMapping("/signup")
   public ResponseEntity<Object> signup(@RequestBody SignupPayload signup) {
     UserModel userNovo = new UserModel();
-    userNovo.setName(signup.getName());
+    userNovo.setNome(signup.getNome());
     userNovo.setEmail(signup.getEmail());
 
     String password = gerarSenhaAleatoria(15);
-    userNovo.setPassword(new BCryptPasswordEncoder().encode(password));
+    userNovo.setSenha(new BCryptPasswordEncoder().encode(password));
 
     try {
       userService.save(userNovo);
@@ -51,9 +51,9 @@ public class AuthController {
     }
   }
 
-  @PostMapping("/singin")
+  @PostMapping("/signin")
   public ResponseEntity<Object> signin(@RequestBody LoginPayload login) {
-    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
+    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha()));
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
     String tokenJwt = jwtUtils.generateTokenFromEmail(login.getEmail());

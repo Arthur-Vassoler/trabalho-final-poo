@@ -5,15 +5,14 @@ import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @MappedSuperclass
 @Data
 public class GenericModel extends RepresentationModel<GenericModel> implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
   @Column
-  private String name;
+  private String nome;
 }

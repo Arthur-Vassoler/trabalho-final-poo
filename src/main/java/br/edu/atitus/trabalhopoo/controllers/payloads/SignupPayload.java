@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SignupPayload {
-  private String name;
+  private String nome;
   private String email;
 }

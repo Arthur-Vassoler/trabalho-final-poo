@@ -20,13 +20,18 @@ public class UserModel extends GenericModel implements UserDetails {
   @Column
   private String email;
 
-  @NotBlank(message = "Campo password não pode ser vazio.")
+  @NotBlank(message = "Campo senha não pode ser vazio.")
   @Column
-  private String password;
+  private String senha;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;
+  }
+
+  @Override
+  public String getPassword() {
+    return this.senha;
   }
 
   @Override
