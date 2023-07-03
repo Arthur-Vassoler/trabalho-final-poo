@@ -12,7 +12,7 @@ public class SwaggerConfig {
   @Bean
   public OpenAPI customOpenAPI() {
     return new OpenAPI()
-      .info(new Info().title("Documentação Trabalho Final POO ").description("Descrição")
+      .info(new Info().title("Documentação Trabalho Final POO Avançado").description("Descrição")
         .contact(new Contact().name("Desenvolvedor Junior").email("a.h.vasoler@gmail.com"))
         .version("version 01"));
   }
